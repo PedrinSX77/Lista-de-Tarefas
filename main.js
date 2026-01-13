@@ -1,8 +1,10 @@
 let desejo = document.querySelector(".texto");
 const enviar = document.querySelector(".enviar");
 const listBody = document.querySelector(".listbody");
+const search = document.querySelector(".search");
 
-let listaDesejos = JSON.parse(localStorage.getItem("tarefas"));
+
+let listaDesejos = JSON.parse(localStorage.getItem("tarefas")) || [];
 
 function renderList(){
     listBody.innerHTML = ""
@@ -17,9 +19,13 @@ function renderList(){
 
 renderList();
 
-enviar.addEventListener('click', function (){
+enviar.addEventListener('click', ()=>{
     if (desejo.value.length > 0){
-        listaDesejos.push(desejo.value)
+        listaDesejos.push({
+            texto: desejo.value,
+            status: false,
+            id: Date.now()
+        })
         localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
 
         renderList()
@@ -28,8 +34,7 @@ enviar.addEventListener('click', function (){
     }
 })
 
-
-listBody.addEventListener('click', function (event){
+listBody.addEventListener('click', (event)=>{
     if (event.target.classList.contains("deleteBtn")){
         const index = event.target.getAttribute("data-index");
 
@@ -37,4 +42,18 @@ listBody.addEventListener('click', function (event){
         localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
         renderList()
     }
+});
+
+listBody.addEventListener('click', (event)=>{
+    const elemento = event.target;
+    const index = elemento.getAttribute("data-index");
+
+    if (elemento.classList.contains("btn-concluir")) {
+        listaDesejos[index].status = !listaDesejos[index].status;
+        
+        localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
+        
+        renderList();
+    }
+    
 });

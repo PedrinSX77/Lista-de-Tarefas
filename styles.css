@@ -77,11 +77,21 @@ body {
     animation: fadeIn 0.3s ease; /* Pequena animação ao surgir */
 }
 
-.listItem p {
+
+
+.listbody .listItem .textType{
+    opacity: 0.8;
     color: #333;
-    font-size: 16px;
     word-break: break-all; /* Evita que textos longos quebrem o layout */
-    margin-right: 10px;
+    margin-right: 10px
+}
+
+.listbody .textType{
+    opacity: 0.8;
+    color: #9ea02e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Botão de Deletar */
@@ -106,4 +116,53 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.status-pendente {
+    background-color: #ffeeba;
+    color: #856404;
+}
+
+.status-concluido {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Estilo base para o botão de concluir/retomar */
+.btn-concluir {
+    background-color: #28a745; /* Verde para Concluir */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.btn-concluir:hover {
+    background-color: #218838;
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+/* Estilo específico para quando a tarefa já está concluída (botão Retomar) */
+/* Dica: Você pode adicionar essa classe dinamicamente no seu html.js se quiser cores diferentes */
+.btn-retomar {
+    background-color: #6c757d; /* Cinza para Retomar */
+}
+
+/* Estilo do Riscado para o parágrafo */
+.riscado {
+    text-decoration: line-through;
+    color: #888;
+    font-style: italic;
 }

@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Tarefas - Dev by PedrinSX777</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <div class="list">
-    <div class="input-group">
-        <input class="texto" type="text" placeholder="O que deseja fazer?">
-        <input class="enviar" type="submit" value="Adicionar">
-    </div>
+        <h1>Lista de Tarefas by developer PedrinSx777</h1>
+        <input class="search" type="text" id="search" placeholder="Pesquisar Tarefa">
+        
+        <div class="input-group">
+            <input class="texto" type="text" placeholder="O que deseja fazer?">
+            <input class="enviar" id="enviar" type="submit" value="Adicionar">
+        </div>
 
-    <ul class="listbody">
-    </ul>
+        <ul class="listbody"></ul>
     </div>
 
     <script src="html.js" defer></script>

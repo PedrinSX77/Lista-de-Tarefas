@@ -1,10 +1,21 @@
 let desejo = document.querySelector(".texto");
 const enviar = document.querySelector(".enviar");
 const listBody = document.querySelector(".listbody");
-const search = document.querySelector(".search");
-
+const search = document.querySelector("#search");
 
 let listaDesejos = JSON.parse(localStorage.getItem("tarefas")) || [];
+
+function atualizarStorage() {
+    try {
+        localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
+    } catch (e) {
+        if (e.name === 'QuotaExceededError' || e.code === 22) {
+            mostrarPopupErro();
+        } else {
+            console.error("Erro desconhecido:", e);
+        }
+    }
+}
 
 function renderList(){
     listBody.innerHTML = ""
@@ -15,6 +26,8 @@ function renderList(){
     if(listaDesejos.length === 0){
         listBody.insertAdjacentHTML("beforeend", voidList())
     }
+
+    search.value = ""
 }
 
 renderList();
@@ -26,34 +39,48 @@ enviar.addEventListener('click', ()=>{
             status: false,
             id: Date.now()
         })
-        localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
-
+        
+        atualizarStorage()
         renderList()
         desejo.value = ""
         desejo.focus();
     }
 })
 
-listBody.addEventListener('click', (event)=>{
-    if (event.target.classList.contains("deleteBtn")){
-        const index = event.target.getAttribute("data-index");
+listBody.addEventListener('click', (event) => {
+    const elemento = event.target;
 
-        listaDesejos.splice(index, 1)
-        localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
-        renderList()
+    const idClicado = Number(elemento.getAttribute("data-id"));
+
+    if (!idClicado) return;
+
+    const indexReal = listaDesejos.findIndex(tarefa => tarefa.id === idClicado);
+
+    if (elemento.classList.contains("deleteBtn")) {
+        listaDesejos.splice(indexReal, 1);
+    } 
+    
+    if (elemento.classList.contains("btn-concluir")) {
+        listaDesejos[indexReal].status = !listaDesejos[indexReal].status;
     }
+
+    atualizarStorage()
+    renderList(); 
 });
 
-listBody.addEventListener('click', (event)=>{
-    const elemento = event.target;
-    const index = elemento.getAttribute("data-index");
+search.addEventListener('input', ()=>{
+    let searchText = search.value.toLowerCase();
+    let desejoDownload = localStorage.getItem("tarefas");
+    let searchedText = JSON.parse(desejoDownload).filter(tarefa => tarefa.texto.toLowerCase().includes(searchText))
+    listBody.innerHTML = ""
 
-    if (elemento.classList.contains("btn-concluir")) {
-        listaDesejos[index].status = !listaDesejos[index].status;
-        
-        localStorage.setItem("tarefas", JSON.stringify(listaDesejos));
-        
-        renderList();
+    searchedText.forEach((value, index) =>{
+        listBody.insertAdjacentHTML("beforeend", itemDesejo(value, index))
+    })
+
+    if(searchedText.length === 0){
+        listBody.insertAdjacentHTML("beforeend", lostItem())
     }
+
     
 });

@@ -1,168 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+:root {
+    --bg: #05070a;
+    --surface: #0f121d;
+    --surface-bright: #171b29;
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    --secondary: #a855f7;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
-    background-color: #f0f2f5;
+    background-color: var(--bg);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
+    color: var(--text-main);
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    padding: 60px 20px;
     min-height: 100vh;
-    padding-top: 50px;
 }
 
-/* Container principal da lista */
 .list {
-    background-color: white;
     width: 100%;
-    max-width: 450px;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-/* Estilo do Grupo de Entrada (Input + Botão) */
-.input-group {
+    max-width: 500px;
     display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
+    flex-direction: column;
+    animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.texto {
-    flex: 1;
-    padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.texto:focus {
-    border-color: #4a90e2;
-}
-
-.enviar {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 0 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.enviar:hover {
-    background-color: #357abd;
-}
-
-/* Estilo da Lista (UL) */
-.listbody {
-    list-style: none;
-}
-
-/* Estilo de cada item da lista (LI) */
-.listItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fafafa;
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border-left: 5px solid #4a90e2;
-    animation: fadeIn 0.3s ease; /* Pequena animação ao surgir */
-}
-
-
-
-.listbody .listItem .textType{
-    opacity: 0.8;
-    color: #333;
-    word-break: break-all; /* Evita que textos longos quebrem o layout */
-    margin-right: 10px
-}
-
-.listbody .textType{
-    opacity: 0.8;
-    color: #9ea02e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Botão de Deletar */
-.deleteBtn {
-    background-color: #ffeded;
-    color: #d9534f;
-    border: 1px solid #ffcccc;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.deleteBtn:hover {
-    background-color: #d9534f;
-    color: white;
-}
-
-/* Animação suave */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+h1 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.4;
+    background: linear-gradient(to right, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.input-group {
+    background: var(--surface);
+    padding: 25px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input#search {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+#enviar {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px -5px var(--primary-glow);
+}
+
+#enviar:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.listbody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+}
+
+.listItem {
+    background: var(--surface);
+    padding: 18px 22px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.listItem:hover {
+    background: var(--surface-bright);
+    transform: translateX(5px);
+}
+
+.listItem p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.riscado {
+    opacity: 0.4;
+    text-decoration: line-through;
+}
+
+.btn-concluir, .deleteBtn {
+    width: 6rem;
+    height: 3rem;
+    padding: 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    margin-left: 8px;
+}
+
+.btn-concluir { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.deleteBtn { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+.btn-concluir:hover { background: var(--success); color: #fff; }
+.deleteBtn:hover { background: var(--danger); color: #fff; }
+
 .badge {
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-top: 6px;
+    display: inline-block;
 }
 
-.status-pendente {
-    background-color: #ffeeba;
-    color: #856404;
+.status-pendente { background: rgba(255, 191, 0, 0.1); color: #ffbf00; }
+.status-concluido { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+
+.textType {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 18px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
-.status-concluido {
-    background-color: #d4edda;
-    color: #155724;
+.popup-erro {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    animation: slideDown 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-/* Estilo base para o botão de concluir/retomar */
-.btn-concluir {
-    background-color: #28a745; /* Verde para Concluir */
+.popup-content {
+    background: #1a1111;
+    border: 1px solid var(--danger);
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+    text-align: center;
+    max-width: 350px;
+    backdrop-filter: blur(10px);
+}
+
+.popup-content .icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.popup-content h3 {
+    color: var(--danger);
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.popup-content p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.popup-content button {
+    background: var(--danger);
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
-    margin-right: 5px;
-    font-size: 13px;
+    transition: 0.2s;
 }
 
-.btn-concluir:hover {
-    background-color: #218838;
-    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+.popup-content button:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
 }
 
-/* Estilo específico para quando a tarefa já está concluída (botão Retomar) */
-/* Dica: Você pode adicionar essa classe dinamicamente no seu html.js se quiser cores diferentes */
-.btn-retomar {
-    background-color: #6c757d; /* Cinza para Retomar */
-}
-
-/* Estilo do Riscado para o parágrafo */
-.riscado {
-    text-decoration: line-through;
-    color: #888;
-    font-style: italic;
+@keyframes slideDown {
+    from { opacity: 0; transform: translate(-50%, -100%); }
+    to { opacity: 1; transform: translate(-50%, 0); }
 }
